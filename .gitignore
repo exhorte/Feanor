@@ -1,0 +1,7 @@
+# Configuration locale de l'outil de prévisualisation (chemins et ports propres à la machine)
+.claude/
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+*.log
