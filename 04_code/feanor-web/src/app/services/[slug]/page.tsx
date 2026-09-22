@@ -92,10 +92,10 @@ export default async function ServicePage({
           title="Ce que nous faisons, concrètement."
         />
 
-        <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {service.prestations.map((p, i) => (
             <Reveal key={p.title} delay={i * 40} className="h-full">
-              <div className="flex h-full flex-col bg-canvas p-6">
+              <div className="tile flex h-full flex-col p-6">
                 <div className="flex items-center gap-3">
                   <span
                     className={cn("size-1.5 shrink-0", tone.solid)}
@@ -161,8 +161,8 @@ export default async function ServicePage({
       <Section>
         <SectionHeader eyebrow="Pour qui" title="Particuliers et professionnels." />
 
-        <div className="mt-12 grid gap-px border border-line bg-line md:grid-cols-2">
-          <div className="bg-canvas p-7 sm:p-9">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <div className="tile p-7 sm:p-9">
             <Home className="size-5 text-accent" strokeWidth={1.75} aria-hidden />
             <h3 className="mt-4 font-display text-xl">Particuliers</h3>
             <ul className="mt-5 space-y-2.5">
@@ -175,7 +175,7 @@ export default async function ServicePage({
             </ul>
           </div>
 
-          <div className="bg-canvas p-7 sm:p-9">
+          <div className="tile p-7 sm:p-9">
             <Building2 className="size-5 text-accent" strokeWidth={1.75} aria-hidden />
             <h3 className="mt-4 font-display text-xl">Professionnels</h3>
             <ul className="mt-5 space-y-2.5">
@@ -205,11 +205,11 @@ export default async function ServicePage({
           intro="La même séquence à chaque fois, du dépannage de particulier au chantier d'entreprise. C'est ce qui rend le devis prévisible."
         />
 
-        <ol className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {service.process.map((etape, i) => (
-            <li key={etape.step} className="bg-canvas">
+            <li key={etape.step}>
               <Reveal delay={i * 50} className="h-full">
-                <div className="flex h-full flex-col p-6">
+                <div className="tile flex h-full flex-col p-6">
                   <span className={cn("tnum font-display text-sm", tone.text)}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -233,15 +233,12 @@ export default async function ServicePage({
       {/* ------------------------------------------------ Autres métiers */}
       <Section surface>
         <SectionHeader eyebrow="Nos autres métiers" title="Un besoin ailleurs ?" />
-        <div className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {autres.map((s) => (
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className={cn(
-                "group flex items-center gap-4 border-l-2 bg-canvas p-6 transition-colors hover:bg-raised",
-                accent[s.accent].borderLeft,
-              )}
+              className="tile group flex items-center gap-4 p-6 transition-shadow hover:shadow-float"
             >
               <MetierIcon icon={s.icon} tone={s.accent} />
               <span>

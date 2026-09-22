@@ -127,7 +127,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="mt-8 border-l-2 border-accent bg-surface p-5">
+            <div className="mt-8 rounded-md border-l-2 border-accent bg-surface p-5">
               <h3 className="font-display font-medium">Ce qui nous aide le plus</h3>
               <ul className="mt-3 space-y-2 text-sm text-muted">
                 <li className="flex gap-3">

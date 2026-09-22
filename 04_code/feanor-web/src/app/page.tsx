@@ -1,9 +1,11 @@
 import { Hero } from "@/components/home/hero";
+import { SectorsMarquee } from "@/components/home/sectors-marquee";
 import { Engagements } from "@/components/home/engagements";
-import { ServicesGrid } from "@/components/home/services-grid";
+import { HowWeWork } from "@/components/home/how-we-work";
+import { ProcessSection } from "@/components/home/process-section";
+import { StatsBar } from "@/components/home/stats-bar";
 import { Segments } from "@/components/home/segments";
 import { Care } from "@/components/home/care";
-import { Pourquoi } from "@/components/home/pourquoi";
 import { Zones } from "@/components/home/zones";
 import { FaqSection } from "@/components/shared/faq-section";
 import { CtaFinal } from "@/components/shared/cta-final";
@@ -27,13 +29,15 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <SectorsMarquee />
       <Engagements />
-      <ServicesGrid />
+      <HowWeWork />
+      <ProcessSection />
+      <StatsBar />
       <Segments />
       <Care />
-      <Pourquoi />
       <Zones />
-      <FaqSection items={faqAccueil} lienToutes surface />
+      <FaqSection items={faqAccueil} lienToutes />
       <CtaFinal />
 
       <JsonLd data={faqJsonLd(faqAccueil)} />

@@ -17,7 +17,7 @@ export function Zones() {
         </div>
 
         <div className="lg:col-span-7">
-          <div className="border border-line bg-surface p-7 sm:p-8">
+          <div className="tile p-7 sm:p-8">
             <h3 className="font-display text-xs font-medium uppercase tracking-[0.16em] text-faint">
               Région de Dakar
             </h3>
@@ -25,7 +25,7 @@ export function Zones() {
               {site.zonesDakar.map((z) => (
                 <li
                   key={z}
-                  className="border border-line px-2.5 py-1 text-sm text-muted"
+                  className="rounded-full border border-line bg-surface px-3 py-1 text-sm text-muted"
                 >
                   {z}
                 </li>
@@ -39,7 +39,7 @@ export function Zones() {
               {site.zonesRegions.map((z) => (
                 <li
                   key={z}
-                  className="border border-line px-2.5 py-1 text-sm text-muted"
+                  className="rounded-full border border-line bg-surface px-3 py-1 text-sm text-muted"
                 >
                   {z}
                 </li>

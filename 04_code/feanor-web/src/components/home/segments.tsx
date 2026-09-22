@@ -12,10 +12,10 @@ import { Reveal } from "@/components/ui/reveal";
  */
 export function Segments() {
   return (
-    <Section surface>
-      <div className="grid gap-px border border-line bg-line md:grid-cols-2">
+    <Section>
+      <div className="grid gap-5 md:grid-cols-2">
         <Reveal>
-          <div className="flex h-full flex-col bg-canvas p-8 sm:p-10">
+          <div className="tile flex h-full flex-col p-8 sm:p-10">
             <Home className="size-6 text-accent" strokeWidth={1.75} aria-hidden />
             <h2 className="mt-5 text-2xl">Vous êtes un particulier</h2>
             <p className="mt-3 text-muted">
@@ -47,7 +47,7 @@ export function Segments() {
         </Reveal>
 
         <Reveal delay={80}>
-          <div className="flex h-full flex-col bg-canvas p-8 sm:p-10">
+          <div className="tile flex h-full flex-col p-8 sm:p-10">
             <Building2 className="size-6 text-accent" strokeWidth={1.75} aria-hidden />
             <h2 className="mt-5 text-2xl">Vous êtes une entreprise</h2>
             <p className="mt-3 text-muted">

@@ -65,11 +65,11 @@ export default function AProposPage() {
           intro="Elles s'appliquent au particulier comme au groupe hôtelier. Si nous ne pouvons pas les tenir sur une intervention, nous le disons avant de commencer."
         />
 
-        <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {site.engagements.map((e, i) => (
             <Reveal key={e.title} delay={i * 50} className="h-full">
-              <div className="flex h-full gap-4 bg-canvas p-7">
-                <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-xs border border-accent/40 bg-accent/10">
+              <div className="tile flex h-full gap-4 p-7">
+                <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-soft">
                   <Check className="size-4 text-accent" strokeWidth={2.5} aria-hidden />
                 </span>
                 <span>
@@ -90,7 +90,7 @@ export default function AProposPage() {
           intro="Chaque technicien a son métier principal. Ce qui est commun à tous, c'est la séquence de travail — et c'est elle qui rend le résultat prévisible."
         />
 
-        <div className="mt-12 grid gap-px border border-line bg-line md:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
           {[
             {
               icon: Users,
@@ -108,7 +108,7 @@ export default function AProposPage() {
               d: "Devis avant, rapport après. Sur les contrats, l'historique complet du parc, qui reste votre propriété.",
             },
           ].map((item) => (
-            <div key={item.t} className="bg-canvas p-7">
+            <div key={item.t} className="tile p-7">
               <item.icon className="size-5 text-accent" strokeWidth={1.75} aria-hidden />
               <h3 className="mt-4 font-display text-lg">{item.t}</h3>
               <p className="mt-2 text-muted">{item.d}</p>

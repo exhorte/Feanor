@@ -5,6 +5,11 @@ Site vitrine de Feanor, entreprise sénégalaise de solutions techniques du bât
 
 Plan produit et arbitrages : [`02_project_plan/PLAN_SITE_FEANOR.md`](../../02_project_plan/PLAN_SITE_FEANOR.md)
 
+**Design** — refonte du 22 septembre 2026, adaptée d'une référence visuelle
+(`05_screenshot/model.jpg`, secteur logistique/3PL) : fond blanc, accent rouge
+corail, cartes détachées à coins arrondis. Détail des jetons et du
+raisonnement : §6 du plan ci-dessus.
+
 ---
 
 ## Démarrer
@@ -57,12 +62,13 @@ src/
 │   ├── secteurs.ts         Secteurs professionnels
 │   ├── zones.ts            Pages locales
 │   ├── faq.ts              FAQ transverse
+│   ├── parcours.ts         Parcours client en 4 étapes (Particuliers + accueil)
 │   └── realisations.ts     Chantiers (vide — voir la règle de publication)
 │
 ├── components/
 │   ├── layout/             En-tête, pied de page, barre d'action mobile
-│   ├── ui/                 Primitives (bouton, section, accordéon…)
-│   ├── home/               Sections de la page d'accueil
+│   ├── ui/                 Primitives (bouton, section, accordéon, photo-frame, stepper…)
+│   ├── home/               Sections de la page d'accueil (hero, marquee, process…)
 │   ├── shared/             Blocs réutilisés entre pages
 │   └── diagnostic/         Parcours « J'ai un problème »
 │

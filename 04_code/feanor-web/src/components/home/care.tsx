@@ -13,7 +13,7 @@ import { cycleCare } from "@/content/contrats";
  */
 export function Care() {
   return (
-    <Section>
+    <Section surface>
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <SectionHeader
@@ -22,7 +22,7 @@ export function Care() {
             intro="Un climatiseur qui lâche en pleine saison chaude coûte la réparation, l'inconfort, et parfois l'exploitation. Le même appareil suivi deux fois par an coûte une fraction de cela — et dure plusieurs années de plus."
           />
 
-          <div className="mt-8 border-l-2 border-accent bg-surface p-6">
+          <div className="mt-8 rounded-md border-l-2 border-accent bg-canvas p-6 shadow-card">
             <p className="text-sm text-muted">
               Sur un parc d&apos;équipements, le vrai calcul n&apos;est pas
               « entretien contre rien ». C&apos;est{" "}
@@ -44,11 +44,11 @@ export function Care() {
 
         {/* Cycle — liste ordonnée, lisible sans image ni schéma lourd */}
         <div className="lg:col-span-7">
-          <ol className="grid gap-px border border-line bg-line sm:grid-cols-2">
+          <ol className="grid gap-4 sm:grid-cols-2">
             {cycleCare.map((etape, i) => (
-              <li key={etape.step} className="bg-canvas">
+              <li key={etape.step}>
                 <Reveal delay={i * 50} className="h-full">
-                  <div className="flex h-full gap-4 p-6">
+                  <div className="tile flex h-full gap-4 p-6">
                     <span className="tnum font-display text-sm font-medium text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>

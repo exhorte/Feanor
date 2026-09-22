@@ -89,7 +89,7 @@ export function DiagnosticFlow() {
     `&body=${encodeURIComponent(message)}`;
 
   return (
-    <div className="border border-line bg-canvas">
+    <div className="tile overflow-hidden">
       {/* Progression */}
       <div className="flex items-center gap-4 border-b border-line px-5 py-4 sm:px-7">
         <div className="flex flex-1 gap-1.5" aria-hidden>
@@ -120,7 +120,7 @@ export function DiagnosticFlow() {
               doute, « Autre » convient très bien.
             </p>
 
-            <div className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {domaines.map((d) => (
                 <button
                   key={d.value}
@@ -130,8 +130,10 @@ export function DiagnosticFlow() {
                     setEtape(1);
                   }}
                   className={cn(
-                    "flex items-center gap-4 bg-canvas p-4 text-left transition-colors hover:bg-surface",
-                    domaine === d.value && "bg-accent-soft",
+                    "flex items-center gap-4 rounded-md border p-4 text-left transition-colors hover:border-accent hover:bg-surface",
+                    domaine === d.value
+                      ? "border-accent bg-accent-soft"
+                      : "border-line bg-canvas",
                   )}
                 >
                   {d.icon && (
@@ -166,7 +168,7 @@ export function DiagnosticFlow() {
               <span className="text-accent">{domaine}</span>
             </p>
 
-            <div className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {besoins.map((b) => (
                 <button
                   key={b.value}
@@ -176,8 +178,10 @@ export function DiagnosticFlow() {
                     setEtape(2);
                   }}
                   className={cn(
-                    "bg-canvas p-4 text-left transition-colors hover:bg-surface",
-                    besoin === b.value && "bg-accent-soft",
+                    "rounded-md border p-4 text-left transition-colors hover:border-accent hover:bg-surface",
+                    besoin === b.value
+                      ? "border-accent bg-accent-soft"
+                      : "border-line bg-canvas",
                   )}
                 >
                   <span className="block font-display font-medium">
@@ -211,7 +215,7 @@ export function DiagnosticFlow() {
                   id="zone"
                   value={zone}
                   onChange={(e) => setZone(e.target.value)}
-                  className="mt-2 h-12 w-full border border-line-strong bg-canvas px-3 text-text focus:border-accent focus:outline-none"
+                  className="mt-2 h-12 w-full rounded-md border border-line-strong bg-canvas px-3 text-text focus:border-accent focus:outline-none"
                 >
                   <option value="">Sélectionnez…</option>
                   {zonesIntervention.map((z) => (
@@ -241,7 +245,7 @@ export function DiagnosticFlow() {
                   aria-invalid={touche && !telOk}
                   aria-describedby="telephone-aide"
                   className={cn(
-                    "tnum mt-2 h-12 w-full border bg-canvas px-3 text-text placeholder:text-faint focus:outline-none",
+                    "tnum mt-2 h-12 w-full rounded-md border bg-canvas px-3 text-text placeholder:text-faint focus:outline-none",
                     touche && !telOk
                       ? "border-urgence-text focus:border-urgence-text"
                       : "border-line-strong focus:border-accent",
@@ -276,7 +280,7 @@ export function DiagnosticFlow() {
                   placeholder="Ex. : le climatiseur du salon ne refroidit plus depuis deux jours."
                   value={precision}
                   onChange={(e) => setPrecision(e.target.value)}
-                  className="mt-2 w-full border border-line-strong bg-canvas px-3 py-2.5 text-text placeholder:text-faint focus:border-accent focus:outline-none"
+                  className="mt-2 w-full rounded-md border border-line-strong bg-canvas px-3 py-2.5 text-text placeholder:text-faint focus:border-accent focus:outline-none"
                 />
                 <p className="mt-2 text-xs text-faint">
                   Une photo vaut souvent mieux qu&apos;un paragraphe — vous
@@ -298,7 +302,7 @@ export function DiagnosticFlow() {
                   href={whatsappUrl(message)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-13 items-center justify-center gap-2 rounded-xs bg-whatsapp font-display font-medium text-on-fill transition-[filter] hover:brightness-110"
+                  className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-whatsapp font-display font-medium text-on-fill transition-[filter] hover:brightness-110"
                 >
                   <MessageCircle className="size-4" aria-hidden />
                   Ouvrir WhatsApp avec ma demande
@@ -308,7 +312,7 @@ export function DiagnosticFlow() {
                   type="button"
                   aria-disabled="true"
                   onClick={signalerIncomplet}
-                  className="inline-flex h-13 cursor-not-allowed items-center justify-center gap-2 rounded-xs bg-raised font-display font-medium text-faint"
+                  className="inline-flex h-13 cursor-not-allowed items-center justify-center gap-2 rounded-full bg-raised font-display font-medium text-faint"
                 >
                   <MessageCircle className="size-4" aria-hidden />
                   Ouvrir WhatsApp avec ma demande
@@ -318,7 +322,7 @@ export function DiagnosticFlow() {
               {etape3Ok ? (
                 <a
                   href={mailtoHref}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xs border border-line-strong font-display text-[0.95rem] text-text transition-colors hover:border-accent hover:text-accent"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-line-strong font-display text-[0.95rem] text-text transition-colors hover:border-accent hover:text-accent"
                 >
                   <Mail className="size-4" aria-hidden />
                   Envoyer par e-mail
@@ -328,7 +332,7 @@ export function DiagnosticFlow() {
                   type="button"
                   aria-disabled="true"
                   onClick={signalerIncomplet}
-                  className="inline-flex h-11 cursor-not-allowed items-center justify-center gap-2 rounded-xs border border-line font-display text-[0.95rem] text-faint"
+                  className="inline-flex h-11 cursor-not-allowed items-center justify-center gap-2 rounded-full border border-line font-display text-[0.95rem] text-faint"
                 >
                   <Mail className="size-4" aria-hidden />
                   Envoyer par e-mail
@@ -348,7 +352,7 @@ export function DiagnosticFlow() {
                 <summary className="font-display text-sm text-muted">
                   Voir le message qui sera envoyé
                 </summary>
-                <pre className="mt-3 overflow-x-auto whitespace-pre-wrap border-l-2 border-accent bg-surface p-4 font-sans text-sm text-muted">
+                <pre className="mt-3 overflow-x-auto whitespace-pre-wrap rounded-md border-l-2 border-accent bg-surface p-4 font-sans text-sm text-muted">
                   {message}
                 </pre>
               </details>

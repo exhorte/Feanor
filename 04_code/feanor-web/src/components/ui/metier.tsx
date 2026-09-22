@@ -71,7 +71,7 @@ export function MetierIcon({
   return (
     <span
       className={cn(
-        "inline-flex size-11 shrink-0 items-center justify-center rounded-xs border",
+        "inline-flex size-12 shrink-0 items-center justify-center rounded-md border",
         accent[tone].bg,
         accent[tone].border,
         className,

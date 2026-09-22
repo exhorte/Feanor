@@ -12,7 +12,7 @@ export function WhatsAppFab() {
       href={whatsappUrl()}
       target="_blank"
       rel="noopener noreferrer"
-      className="group fixed bottom-6 right-6 z-50 hidden items-center gap-3 rounded-xs border border-whatsapp/40 bg-whatsapp px-4 py-3 text-on-fill shadow-lg transition-all hover:brightness-110 md:inline-flex"
+      className="group fixed bottom-6 right-6 z-50 hidden items-center gap-3 rounded-full bg-whatsapp px-5 py-3.5 text-on-fill shadow-[0_10px_28px_-8px_rgb(37_211_102/0.55)] transition-transform hover:scale-105 md:inline-flex"
       aria-label="Nous écrire sur WhatsApp"
     >
       <MessageCircle className="size-5" aria-hidden />

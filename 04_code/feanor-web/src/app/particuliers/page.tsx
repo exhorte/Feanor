@@ -13,6 +13,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { services } from "@/content/services";
 import { faqFlat } from "@/content/faq";
 import { site } from "@/content/site";
+import { parcoursClient } from "@/content/parcours";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
@@ -63,25 +64,6 @@ const gestesUrgence = [
   },
 ];
 
-const etapes = [
-  {
-    t: "Vous nous décrivez le problème",
-    d: "Par WhatsApp, une photo et deux phrases suffisent souvent. Nous posons trois ou quatre questions pour cadrer et vous dire si un déplacement s'impose.",
-  },
-  {
-    t: "Nous venons diagnostiquer",
-    d: "Sur un créneau convenu. On identifie la cause avant d'annoncer un prix — jamais l'inverse.",
-  },
-  {
-    t: "Vous validez le devis",
-    d: "Pièces et main-d'œuvre détaillées. Rien ne commence avant votre accord, et rien ne s'y ajoute sans un nouvel accord.",
-  },
-  {
-    t: "Nous intervenons et nous expliquons",
-    d: "Essais devant vous, zone remise en état, et un rapport écrit de ce qui a été fait.",
-  },
-];
-
 const faqParticuliers = faqFlat.filter((q) =>
   [
     "Le devis est-il payant ?",
@@ -120,16 +102,16 @@ export default function ParticuliersPage() {
           title="Quatre étapes, aucune surprise."
         />
 
-        <ol className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {etapes.map((e, i) => (
-            <li key={e.t} className="bg-canvas">
+        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {parcoursClient.map((e, i) => (
+            <li key={e.titre}>
               <Reveal delay={i * 60} className="h-full">
-                <div className="flex h-full flex-col p-7">
+                <div className="tile flex h-full flex-col p-7">
                   <span className="tnum font-display text-sm text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-3 font-display font-medium">{e.t}</h3>
-                  <p className="mt-2 text-sm text-muted">{e.d}</p>
+                  <h3 className="mt-3 font-display font-medium">{e.titre}</h3>
+                  <p className="mt-2 text-sm text-muted">{e.detail}</p>
                 </div>
               </Reveal>
             </li>
@@ -145,15 +127,12 @@ export default function ParticuliersPage() {
           intro="Maison, appartement, villa ou résidence. Une intervention ponctuelle, ou un entretien régulier si vous avez plusieurs équipements."
         />
 
-        <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {services.map((s, i) => (
             <Reveal key={s.slug} delay={i * 50} className="h-full">
               <Link
                 href={`/services/${s.slug}`}
-                className={cn(
-                  "group flex h-full flex-col border-l-2 bg-canvas p-7 transition-colors hover:bg-surface",
-                  accent[s.accent].borderLeft,
-                )}
+                className="tile group flex h-full flex-col p-7 transition-shadow hover:shadow-float"
               >
                 <MetierIcon icon={s.icon} tone={s.accent} />
                 <h3 className="mt-5 font-display text-lg">{s.name}</h3>
@@ -201,9 +180,9 @@ export default function ParticuliersPage() {
           </div>
 
           <div className="lg:col-span-8">
-            <div className="grid gap-px border border-line bg-line sm:grid-cols-2">
+            <div className="grid gap-5 sm:grid-cols-2">
               {gestesUrgence.map((g) => (
-                <div key={g.situation} className="bg-canvas p-6">
+                <div key={g.situation} className="tile p-6">
                   <div className="flex items-start gap-3">
                     <ShieldAlert
                       className="mt-0.5 size-4 shrink-0 text-urgence-text"

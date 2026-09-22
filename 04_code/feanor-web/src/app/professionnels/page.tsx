@@ -55,7 +55,7 @@ export default function ProfessionnelsPage() {
           </div>
 
           <div className="lg:col-span-7">
-            <ul className="grid gap-px border border-line bg-line sm:grid-cols-2">
+            <ul className="grid gap-4 sm:grid-cols-2">
               {[
                 {
                   icon: ClipboardList,
@@ -78,7 +78,7 @@ export default function ProfessionnelsPage() {
                   d: "Trois prestataires, et chacun renvoie le problème sur le métier voisin.",
                 },
               ].map((item) => (
-                <li key={item.t} className="bg-canvas p-6">
+                <li key={item.t} className="tile p-6">
                   <item.icon
                     className="size-5 text-urgence-text"
                     strokeWidth={1.75}
@@ -101,10 +101,10 @@ export default function ProfessionnelsPage() {
           intro="Nous ne vendons pas la même chose à un hôtel et à un entrepôt. Ce qui change, ce n'est pas la prestation : c'est ce qui se casse en premier, et ce que ça coûte."
         />
 
-        <div className="mt-12 grid gap-px border border-line bg-line md:grid-cols-2">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
           {secteurs.map((s, i) => (
             <Reveal key={s.slug} delay={i * 40} className="h-full">
-              <article className="flex h-full flex-col bg-canvas p-7">
+              <article className="tile flex h-full flex-col p-7">
                 <h3 className="font-display text-lg">{s.nom}</h3>
                 <p className="mt-3 border-l-2 border-accent pl-4 text-sm text-muted">
                   {s.enjeu}
@@ -131,19 +131,19 @@ export default function ProfessionnelsPage() {
           intro="Plus le coût d'un arrêt est élevé, plus le délai d'intervention garanti doit être court. C'est le seul critère qui détermine vraiment le palier."
         />
 
-        <div className="mt-12 grid gap-px border border-line bg-line lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {contrats.map((c) => (
             <div
               key={c.tier}
               className={cn(
-                "flex flex-col bg-canvas p-7 sm:p-8",
+                "tile flex flex-col p-7 sm:p-8",
                 c.featured && "ring-2 ring-inset ring-accent",
               )}
             >
               <div className="flex items-center justify-between gap-3">
                 <h3 className="font-display text-xl">{c.tier}</h3>
                 {c.featured && (
-                  <span className="border border-accent px-2 py-0.5 font-display text-[0.65rem] uppercase tracking-[0.14em] text-accent">
+                  <span className="rounded-full border border-accent px-2.5 py-0.5 font-display text-[0.65rem] uppercase tracking-[0.14em] text-accent">
                     Le plus choisi
                   </span>
                 )}
@@ -189,7 +189,7 @@ export default function ProfessionnelsPage() {
         </div>
 
         {/* Pourquoi pas de prix — l'objection arrive ici, on la traite ici. */}
-        <div className="mt-8 border border-line bg-canvas p-6">
+        <div className="tile mt-8 p-6">
           <h3 className="font-display font-medium">
             Pourquoi aucun prix n&apos;est affiché
           </h3>
@@ -239,7 +239,7 @@ export default function ProfessionnelsPage() {
 
       {/* ------------------------------------------------ Audit */}
       <Section surface>
-        <div className="border-l-2 border-accent bg-canvas p-8 sm:p-10">
+        <div className="rounded-md border-l-2 border-accent bg-canvas p-8 shadow-card sm:p-10">
           <h2 className="text-2xl sm:text-3xl">
             Commencez par un audit, pas par un contrat.
           </h2>

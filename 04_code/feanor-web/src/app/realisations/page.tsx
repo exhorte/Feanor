@@ -36,9 +36,9 @@ export default function RealisationsPage() {
 
       {realisationsVisibles ? (
         <Section>
-          <div className="grid gap-px border border-line bg-line md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             {realisationsPubliables.map((r) => (
-              <article key={r.slug} className="bg-canvas p-7">
+              <article key={r.slug} className="tile p-7">
                 <h2 className="font-display text-xl">{r.titre}</h2>
                 <dl className="mt-5 divide-y divide-line border-y border-line text-sm">
                   {[
@@ -65,7 +65,7 @@ export default function RealisationsPage() {
            Une galerie garnie d'images de banque ferait plus de dégâts
            qu'une page qui dit simplement où elle en est. */
         <Section>
-          <div className="mx-auto max-w-2xl border border-line bg-surface p-8 text-center sm:p-12">
+          <div className="tile mx-auto max-w-2xl p-8 text-center sm:p-12">
             <Camera
               className="mx-auto size-7 text-accent"
               strokeWidth={1.5}

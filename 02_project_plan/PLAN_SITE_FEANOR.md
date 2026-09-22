@@ -192,24 +192,37 @@ Les pages services et les pages locales sont **générées depuis ce modèle** v
 
 ## 6. Design system
 
-**Direction :** premium industriel. Sombre, dense, précis. L'inverse du site d'artisan générique (bleu/rouge, photos de climatiseurs, texte partout).
+> **Révisé le 22 septembre 2026.** La direction ci-dessous remplace la V1
+> (fond sombre, accent cyan, angles vifs) sur demande explicite : adaptation
+> d'une référence visuelle du secteur logistique/3PL (`05_screenshot/model.jpg`)
+> — cartes détachées à coins arrondis, accent rouge corail, structure en
+> bandes (hero à deux colonnes, bande de secteurs défilante, section
+> horaires + grille de services, trio photo + chronologie, bande de stats).
+> La logique reste la même qu'en V1 — un seul accent, contenu réel plutôt
+> qu'inventé — seul l'habillage visuel change.
+
+**Direction :** clair, structuré par la carte. Fond blanc, texte quasi-noir,
+un accent unique porté par les CTA et les liens. Coins largement arrondis,
+cartes détachées avec ombre douce plutôt qu'une trame à liserés.
 
 ### Jetons
 
 ```
-Fond            #0A0C10   noir bleuté, pas noir pur
-Surface         #12151C
-Surface élevée  #1A1F29
-Bordure         #232A36
-Texte           #F2F4F7   blanc cassé, jamais #FFF
-Texte atténué   #98A2B3
+Fond (canvas)   #FFFFFF
+Surface         #F7F5F3   sections alternées, gris chaud très clair
+Bordure         #E7E2DC
 
-Accent          #22D3EE   cyan électrique — UN seul accent
-Accent pressé   #06B6D4
-Urgence         #F97316   réservé strictement aux CTA d'urgence
+Encre           #17181C   cartes et bandes sombres (contraste, pas le fond du site)
+Texte           #16151A
+Texte atténué   #5C5751
+
+Accent          #DC2F1D   rouge corail — UN seul accent, ≥ 4,5:1 sur blanc
+                          et sous texte blanc (vérifié, voir globals.css)
+Urgence         #F97316   distinct de l'accent — réservé aux CTA d'urgence
+WhatsApp        #25D366   vert de marque conservé
 
 Métiers (liserés et icônes uniquement, jamais en aplat)
-  froid #22D3EE · électricité #FBBF24 · plomberie #3B82F6 · maintenance #F97316
+  froid #0E7490 · électricité #B45309 · plomberie #1D4ED8 · maintenance #7C3AED
 ```
 
 ### Typographie
@@ -220,10 +233,22 @@ Métiers (liserés et icônes uniquement, jamais en aplat)
 
 ### Principes
 
-- **Grille visible** : liserés 1 px, séparations nettes, rien de flottant. On vend de la rigueur technique.
-- **Angles vifs ou rayon 2 px.** Pas de cartes arrondies molles.
-- **Le mouvement est fonctionnel** : apparition au scroll, états de survol. Aucune animation décorative. `prefers-reduced-motion` respecté.
-- **Contraste AA minimum** sur tout texte.
+- **Cartes détachées, pas de trame hairline.** Chaque carte a son propre
+  fond, sa bordure fine, son ombre douce (`--shadow-card`) — l'utilitaire
+  `.tile`, appliqué partout où la V1 assemblait des cartes en grille à
+  liserés 1 px.
+- **Coins largement arrondis.** Boutons en pilule (`rounded-full`), cartes
+  à 18–24 px de rayon. L'inverse du parti pris « angles vifs » de la V1.
+- **Emplacements image prêts, jamais d'image de banque.** Le composant
+  `PhotoFrame` (voir `src/components/ui/photo-frame.tsx`) réserve le cadre,
+  le ratio et l'ombre qu'occupera la vraie photo — cohérent avec le
+  protocole avant/pendant/après déjà défini pour les Réalisations.
+- **Le mouvement est fonctionnel** : apparition au scroll (`animation-timeline:
+  view()`), bande de secteurs en défilement continu (CSS pur), états de
+  survol. Aucune animation décorative, aucune librairie. `prefers-reduced-motion`
+  respecté partout.
+- **Contraste AA minimum** sur tout texte — vérifié par calcul, pas à l'œil,
+  pour l'accent en particulier (voir le commentaire de tête de `globals.css`).
 
 ---
 

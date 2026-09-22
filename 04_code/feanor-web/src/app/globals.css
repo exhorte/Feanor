@@ -2,62 +2,82 @@
 
 /* ==========================================================================
    FEANOR — Design tokens
-   Direction : clair, technique, précis. Beaucoup de blanc, des liserés fins,
-   des angles vifs. Un seul accent (cyan). Les couleurs métier ne servent
-   qu'en liseré, point ou icône — jamais en aplat de fond.
+   Direction : moderne, chaleureux, structuré par les cartes. Fond blanc,
+   texte quasi-noir, un seul accent rouge corail porté par les CTA et les
+   liens. Coins largement arrondis, cartes détachées avec ombre douce plutôt
+   que la trame à liserés hairline de la version précédente.
 
-   Deux valeurs d'accent, et ce n'est pas un doublon :
-   — `accent`      : cyan profond, pour le TEXTE et les liens (contraste AA
-                     sur blanc ; le cyan clair y serait illisible).
-   — `accent-fill` : cyan électrique, pour les APLATS (boutons), sur lesquels
-                     on pose un texte sombre (`on-fill`).
+   Historique : la V1 visait un rendu « industriel » à angles vifs et accent
+   cyan. Ce jeton de couleurs le remplace sur demande explicite, à l'imitation
+   d'une référence (secteur logistique/3PL) — voir 05_screenshot/model.jpg et
+   la note d'adaptation en tête de `src/components/home/hero.tsx`.
+
+   Deux valeurs d'accent, toujours pas un doublon :
+   — `accent`      : rouge corail, pour le TEXTE, les liens, les icônes.
+   — `accent-fill` : même teinte, dédiée aux APLATS (boutons) — calculée pour
+                     rester ≥ 4.5:1 avec du texte blanc par-dessus (AA).
    ========================================================================== */
 
 @theme {
   /* Surfaces */
   --color-canvas: #ffffff;
-  --color-surface: #f6f8fa;
-  --color-raised: #eef1f5;
-  --color-line: #e2e7ee;
-  --color-line-strong: #c3ccd8;
+  --color-surface: #f7f5f3;
+  --color-surface-alt: #f1eeea;
+  --color-raised: #ffffff;
+  --color-line: #e7e2dc;
+  --color-line-strong: #d3ccc2;
+
+  /* Encre — cartes et blocs sombres (le contraste, pas le fond du site) */
+  --color-ink: #17181c;
+  --color-ink-raised: #212227;
 
   /* Texte */
-  --color-text: #0e1521;
-  --color-muted: #525f72;
-  --color-faint: #78849a;
+  --color-text: #16151a;
+  --color-muted: #5c5751;
+  --color-faint: #8a8479;
 
-  /* Accent */
-  --color-accent: #0e7490;
-  --color-accent-deep: #155e75;
-  --color-accent-fill: #22d3ee;
-  --color-accent-fill-hover: #06b6d4;
-  --color-accent-soft: #ecfeff;
+  /* Accent — rouge corail, calculé pour ≥ 4.5:1 sur blanc et sous texte blanc */
+  --color-accent: #dc2f1d;
+  --color-accent-deep: #b82716;
+  --color-accent-fill: #dc2f1d;
+  --color-accent-fill-hover: #b82716;
+  --color-accent-soft: #fdece9;
 
-  /* Texte posé sur un aplat coloré (cyan, vert, orange) */
-  --color-on-fill: #0b1220;
+  /* Texte posé sur un aplat de couleur (rouge, vert, orange) */
+  --color-on-fill: #ffffff;
+  /* Texte posé sur une carte encre (fond quasi-noir) */
+  --color-on-ink: #f5f3f0;
+  --color-on-ink-muted: #a8a29a;
 
-  /* Urgence — strictement réservé aux CTA d'urgence */
+  /* Urgence — distinct du rouge de marque (orange, jamais confondu) */
   --color-urgence: #f97316;
   --color-urgence-text: #c2410c;
 
-  /* WhatsApp — vert de marque conservé, texte sombre par-dessus */
+  /* WhatsApp — vert de marque conservé */
   --color-whatsapp: #25d366;
   --color-whatsapp-text: #0f7a4f;
 
-  /* Couleurs métier — versions profondes, lisibles sur blanc */
+  /* Couleurs métier — liserés et icônes uniquement, jamais en aplat */
   --color-metier-froid: #0e7490;
   --color-metier-elec: #b45309;
   --color-metier-plomberie: #1d4ed8;
-  --color-metier-maintenance: #c2410c;
+  --color-metier-maintenance: #7c3aed;
 
   /* Typographie */
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Angles vifs — pas de cartes arrondies molles */
-  --radius-none: 0px;
-  --radius-xs: 2px;
-  --radius-sm: 3px;
+  /* Rayons — cartes détachées, coins largement arrondis */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Ombres — élévation douce pour les cartes flottantes sur photo */
+  --shadow-color: 22 20 18;
+  --shadow-float: 0 8px 24px -8px rgb(var(--shadow-color) / 0.18), 0 2px 8px -2px rgb(var(--shadow-color) / 0.10);
+  --shadow-card: 0 1px 2px rgb(var(--shadow-color) / 0.04), 0 12px 32px -16px rgb(var(--shadow-color) / 0.10);
 }
 
 @layer base {
@@ -102,7 +122,7 @@
     font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.025em;
-    line-height: 1.1;
+    line-height: 1.08;
     text-wrap: balance;
   }
 
@@ -150,6 +170,67 @@
   border-left-width: 2px;
   border-left-style: solid;
   padding-left: 1rem;
+}
+
+/* Carte détachée : coin arrondi, fond canvas, ombre douce.
+   Remplace la trame à liserés hairline (grid gap-px) de la V1. */
+@utility tile {
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-md);
+  border-width: 1px;
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-card);
+}
+
+/* Carte flottante posée sur une photo — ombre plus marquée, pas de bordure */
+@utility tile-float {
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+}
+
+/* Emplacement réservé à une photo à venir.
+   Fond en dégradé + grille technique + repère central, pour que la zone se
+   lise comme une composition volontaire et non comme une image cassée. */
+@utility photo-slot {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(155deg, var(--color-surface) 0%, var(--color-surface-alt) 100%);
+}
+
+@utility photo-slot-dark {
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(155deg, #23242a 0%, var(--color-ink) 100%);
+}
+
+/* Défilement horizontal continu — bande de secteurs/partenaires.
+   Deux copies de la même liste, la seconde referme la boucle : translation
+   de -50% donne un défilement infini sans à-coup, 0 Ko de JavaScript. */
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+.marquee-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Apparition au scroll — 100 % CSS, 0 Ko de JavaScript.

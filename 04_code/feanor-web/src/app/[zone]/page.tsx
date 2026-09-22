@@ -103,7 +103,7 @@ export default async function ZonePage({
             <p className="text-lg text-muted">{zone.contexte}</p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <div className="flex flex-1 items-start gap-3 border-l-2 border-accent bg-surface p-5">
+              <div className="flex flex-1 items-start gap-3 rounded-md border-l-2 border-accent bg-surface p-5">
                 <Clock className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
                 <span>
                   <span className="block font-display text-sm font-medium">
@@ -130,7 +130,7 @@ export default async function ZonePage({
           {zone.quartiers.map((q) => (
             <li
               key={q}
-              className="inline-flex items-center gap-2 border border-line bg-canvas px-3 py-1.5 text-sm text-muted"
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-canvas px-3.5 py-1.5 text-sm text-muted shadow-card"
             >
               <MapPin className="size-3.5 text-accent" aria-hidden />
               {q}
@@ -146,10 +146,10 @@ export default async function ZonePage({
           title={`${zone.service} — ce que nous faisons.`}
         />
 
-        <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {service.prestations.map((p, i) => (
             <Reveal key={p.title} delay={i * 40} className="h-full">
-              <div className="flex h-full flex-col bg-canvas p-6">
+              <div className="tile flex h-full flex-col p-6">
                 <div className="flex items-center gap-3">
                   <span className={cn("size-1.5 shrink-0", tone.solid)} aria-hidden />
                   <h3 className="font-display font-medium">{p.title}</h3>
