@@ -1,0 +1,274 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   ORALEC — Jetons de design
+
+   Charte imposée : quatre couleurs, le blanc dominant.
+     #001969  marine   — la marque : boutons, liens, icônes, bandeaux sombres
+     #393f4b  ardoise  — le texte courant
+     #000000  noir     — les titres
+     #ffffff  blanc    — le fond, partout où rien d'autre ne s'impose
+
+   Toutes les autres valeurs ci-dessous sont des teintes ou des ombres de ces
+   quatre couleurs (fonds alternés, bordures, survols), à deux exceptions
+   fonctionnelles près : le vert WhatsApp, réservé au logo du canal (on le
+   reconnaît à sa couleur), et un rouge d'erreur de formulaire.
+
+   Contrastes calculés (WCAG) :
+     marine sur blanc 15,6:1 · ardoise sur blanc 10,6:1 · subtil sur blanc 6,2:1
+     blanc à 70 % sur marine 8,1:1
+   ========================================================================== */
+
+:root {
+  --radius: 0.625rem;
+
+  /* La charte */
+  --oralec-marine: #001969;
+  --oralec-ardoise: #393f4b;
+  --oralec-noir: #000000;
+  --oralec-blanc: #ffffff;
+
+  /* Jetons shadcn/ui, mappés sur la charte */
+  --background: var(--oralec-blanc);
+  --foreground: var(--oralec-noir);
+  --card: var(--oralec-blanc);
+  --card-foreground: var(--oralec-noir);
+  --popover: var(--oralec-blanc);
+  --popover-foreground: var(--oralec-noir);
+  --primary: var(--oralec-marine);
+  --primary-foreground: var(--oralec-blanc);
+  --secondary: #eef1f8;
+  --secondary-foreground: var(--oralec-marine);
+  --muted: #f4f6fa;
+  --muted-foreground: var(--oralec-ardoise);
+  --accent: #eef1f8;
+  --accent-foreground: var(--oralec-marine);
+  --destructive: #b42318;
+  --border: #e2e6ee;
+  --input: #cfd5e1;
+  --ring: var(--oralec-marine);
+
+  /* Extensions Oralec — teintes et ombres de la charte */
+  --marine-profond: #000c33;
+  --marine-clair: #e9edf7;
+  --subtil: #5b616d;
+
+  /* Couleur fonctionnelle : logo WhatsApp uniquement */
+  --whatsapp: #25d366;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-marine: var(--oralec-marine);
+  --color-marine-profond: var(--marine-profond);
+  --color-marine-clair: var(--marine-clair);
+  --color-ardoise: var(--oralec-ardoise);
+  --color-subtil: var(--subtil);
+  --color-whatsapp: var(--whatsapp);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@theme {
+  /* Ombres teintées marine plutôt que grises : elles restent dans la charte */
+  --shadow-card: 0 1px 2px rgb(0 25 105 / 0.04), 0 10px 30px -16px rgb(0 25 105 / 0.18);
+  --shadow-float: 0 4px 12px -4px rgb(0 25 105 / 0.08), 0 24px 56px -24px rgb(0 25 105 / 0.38);
+  --shadow-band: 0 30px 60px -30px rgb(0 12 51 / 0.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    color-scheme: light;
+    @apply font-sans;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Pas de couleur imposée aux titres : ils héritent, ce qui les laisse
+     blancs dans les bandeaux marine sans classe supplémentaire. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--oralec-marine);
+    color: var(--oralec-blanc);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--oralec-marine);
+    outline-offset: 2px;
+  }
+
+  /* Chiffres tabulaires pour les numéros de téléphone et les données */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
+/* ==========================================================================
+   Motifs de fond — 100 % CSS, 0 Ko de média
+   Noms préfixés `pattern-` et non `bg-` : `cn()` (tailwind-merge) traiterait
+   un `bg-*` inconnu comme une couleur de fond et l'écraserait.
+   ========================================================================== */
+
+/* Trame technique, sur fond clair */
+@utility pattern-grid {
+  background-image:
+    linear-gradient(to right, rgb(0 25 105 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 25 105 / 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Trame technique, sur fond marine */
+@utility pattern-grid-light {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Trame de points, plus douce que la grille */
+@utility pattern-dots {
+  background-image: radial-gradient(rgb(0 25 105 / 0.14) 1px, transparent 1.4px);
+  background-size: 20px 20px;
+}
+
+/* Estompe un motif vers les bords */
+@utility fade-mask {
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, #000 30%, transparent 100%);
+}
+
+@utility fade-mask-right {
+  mask-image: linear-gradient(to right, #000 0%, transparent 85%);
+}
+
+/* ==========================================================================
+   Apparition au scroll — 100 % CSS, 0 Ko de JavaScript.
+   Les navigateurs sans `animation-timeline` affichent simplement le contenu :
+   la dégradation est l'état normal, jamais un écran vide. La plage se termine
+   tôt (entry 60 %) pour qu'un bloc en bas de page ne reste pas figé.
+   ========================================================================== */
+
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  /* Accordéon natif <details>/<summary> : accessible, indexable, sans JS */
+  .accordion-item > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .accordion-item > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .accordion-item > summary .accordion-icon {
+    transition: transform 200ms ease;
+  }
+
+  .accordion-item[open] > summary .accordion-icon {
+    transform: rotate(45deg);
+  }
+
+  /* Lien de contenu souligné, lisible */
+  .prose-link {
+    color: var(--oralec-marine);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .prose-link:hover {
+    text-decoration-thickness: 2px;
+  }
+}
